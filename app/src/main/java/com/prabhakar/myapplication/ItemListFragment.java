@@ -78,8 +78,8 @@ public class ItemListFragment extends Fragment implements ItemClickListener {
     @Override
     public void onItemClick(int position) {
         Toast.makeText(getContext(),"Click on item "+(position+1),Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(getContext(),ItemListActivity.class);
-        intent.putExtra("fragment","detail");
-        startActivity(intent);
+//        Intent intent = new Intent(getContext(),ItemListActivity.class);
+//        intent.putExtra("fragment","detail");
+//        startActivity(intent);
     }
 }
