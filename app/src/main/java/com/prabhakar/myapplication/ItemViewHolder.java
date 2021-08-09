@@ -2,6 +2,7 @@ package com.prabhakar.myapplication;
 
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -12,15 +13,26 @@ import com.bumptech.glide.Glide;
 public class ItemViewHolder extends RecyclerView.ViewHolder {
     private TextView title;
     private ImageView image;
+    private LinearLayout linearLayout;
+    private CommunicationListener communicationListener;
 
-    public ItemViewHolder(@NonNull View itemView) {
+    public ItemViewHolder(@NonNull View itemView, CommunicationListener communicationListener) {
         super(itemView);
+        this.communicationListener = communicationListener;
         initViews(itemView);
     }
 
     private void initViews(View itemView) {
         title = itemView.findViewById(R.id.item_title);
         image = itemView.findViewById(R.id.item_img);
+        linearLayout = itemView.findViewById(R.id.item_card);
+        linearLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                itemClickListener.onItemClick(getAdapterPosition());
+                communicationListener.launchItemDetailsFragment(getAdapterPosition());
+            }
+        });
     }
 
     public void setItemData(ResponseModel responseModel) {

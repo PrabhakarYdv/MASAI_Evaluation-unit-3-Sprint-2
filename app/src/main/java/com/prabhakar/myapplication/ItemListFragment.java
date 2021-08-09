@@ -18,10 +18,11 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class ItemListFragment extends Fragment {
+public class ItemListFragment extends Fragment implements CommunicationListener {
     private RecyclerView recyclerView;
     private ArrayList<ResponseModel> item;
     private ItemAdapter itemAdapter;
+    private CommunicationListener communicationListener;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -49,7 +50,7 @@ public class ItemListFragment extends Fragment {
 
 
     private void setAdapter() {
-        itemAdapter = new ItemAdapter(item);
+        itemAdapter = new ItemAdapter(item, this);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(itemAdapter);
     }
@@ -59,8 +60,8 @@ public class ItemListFragment extends Fragment {
         apiService.getItem().enqueue(new Callback<ArrayList<ResponseModel>>() {
             @Override
             public void onResponse(Call<ArrayList<ResponseModel>> call, Response<ArrayList<ResponseModel>> response) {
-                if (response.body()!=null){
-                    item=response.body();
+                if (response.body() != null) {
+                    item = response.body();
                     setAdapter();
                 }
             }
@@ -71,5 +72,11 @@ public class ItemListFragment extends Fragment {
             }
         });
 
+    }
+
+
+    @Override
+    public void launchItemDetailsFragment(int position) {
+        communicationListener.launchItemDetailsFragment(position);
     }
 }
