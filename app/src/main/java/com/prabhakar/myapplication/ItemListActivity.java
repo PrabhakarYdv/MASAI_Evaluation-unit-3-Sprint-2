@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-public class ItemListActivity extends AppCompatActivity implements CommunicationListener{
+public class ItemListActivity extends AppCompatActivity {
 
     private FragmentManager fragmentManager;
 
@@ -15,17 +15,19 @@ public class ItemListActivity extends AppCompatActivity implements Communication
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_item_list);
         fragmentManager = getSupportFragmentManager();
+        launchItemListFragment();
+    }
 
+    private void launchItemListFragment() {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         ItemListFragment itemListFragment = new ItemListFragment();
         fragmentTransaction.add(R.id.fragment, itemListFragment, "ItemFragment").commit();
     }
 
-
-    @Override
-    public void launchItemDetailsFragment(int position) {
+    private void launchItemDetailsFragment() {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         ItemDetailsFragment itemDetailsFragment = new ItemDetailsFragment();
         fragmentTransaction.replace(R.id.fragment, itemDetailsFragment, "ItemDetailsFragment").addToBackStack("").commit();
     }
+
 }

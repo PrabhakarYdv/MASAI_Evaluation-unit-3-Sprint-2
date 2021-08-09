@@ -14,11 +14,11 @@ public class ItemViewHolder extends RecyclerView.ViewHolder {
     private TextView title;
     private ImageView image;
     private LinearLayout linearLayout;
-    private CommunicationListener communicationListener;
+    private ItemClickListener itemClickListener;
 
-    public ItemViewHolder(@NonNull View itemView, CommunicationListener communicationListener) {
+    public ItemViewHolder(@NonNull View itemView, ItemClickListener itemClickListener) {
         super(itemView);
-        this.communicationListener = communicationListener;
+        this.itemClickListener = itemClickListener;
         initViews(itemView);
     }
 
@@ -29,8 +29,7 @@ public class ItemViewHolder extends RecyclerView.ViewHolder {
         linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                itemClickListener.onItemClick(getAdapterPosition());
-                communicationListener.launchItemDetailsFragment(getAdapterPosition());
+                itemClickListener.onItemClick(getAdapterPosition());
             }
         });
     }

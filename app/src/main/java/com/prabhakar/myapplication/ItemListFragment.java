@@ -1,9 +1,11 @@
 package com.prabhakar.myapplication;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -18,11 +20,10 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class ItemListFragment extends Fragment implements CommunicationListener {
+public class ItemListFragment extends Fragment implements ItemClickListener {
     private RecyclerView recyclerView;
     private ArrayList<ResponseModel> item;
     private ItemAdapter itemAdapter;
-    private CommunicationListener communicationListener;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -74,9 +75,11 @@ public class ItemListFragment extends Fragment implements CommunicationListener 
 
     }
 
-
     @Override
-    public void launchItemDetailsFragment(int position) {
-        communicationListener.launchItemDetailsFragment(position);
+    public void onItemClick(int position) {
+        Toast.makeText(getContext(),"Click on item "+(position+1),Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(getContext(),ItemListActivity.class);
+        intent.putExtra("fragment","detail");
+        startActivity(intent);
     }
 }

@@ -11,12 +11,11 @@ import java.util.ArrayList;
 
 public class ItemAdapter extends RecyclerView.Adapter<ItemViewHolder> {
     private ArrayList<ResponseModel> itemList;
-    private CommunicationListener communicationListener
-    ;
+    private ItemClickListener itemClickListener;
 
-    public ItemAdapter(ArrayList<ResponseModel> itemList, CommunicationListener communicationListener) {
+    public ItemAdapter(ArrayList<ResponseModel> itemList, ItemClickListener itemClickListener) {
         this.itemList = itemList;
-        this.communicationListener = communicationListener;
+        this.itemClickListener = itemClickListener;
     }
 
     @NonNull
@@ -24,7 +23,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemViewHolder> {
     @Override
     public ItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_layout, parent, false);
-        return new ItemViewHolder(view,communicationListener);
+        return new ItemViewHolder(view,itemClickListener);
     }
 
     @Override
@@ -34,7 +33,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemViewHolder> {
     }
 
     @Override
-    public int getItemCount() {
+    public int getItemCount(){
         return itemList.size();
     }
 }
