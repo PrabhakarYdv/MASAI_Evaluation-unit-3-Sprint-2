@@ -7,6 +7,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+
 public class ItemViewHolder extends RecyclerView.ViewHolder {
     private TextView title;
     private ImageView image;
@@ -20,8 +22,9 @@ public class ItemViewHolder extends RecyclerView.ViewHolder {
         title = itemView.findViewById(R.id.item_title);
         image = itemView.findViewById(R.id.item_img);
     }
-    public void setItemData(ResponseModel responseModel){
-        title.setText(responseModel.getTitle());
 
+    public void setItemData(ResponseModel responseModel) {
+        title.setText(responseModel.getTitle());
+        Glide.with(image).load(responseModel.getImage()).into(image);
     }
 }
