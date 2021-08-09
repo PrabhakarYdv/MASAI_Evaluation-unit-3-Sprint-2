@@ -16,9 +16,8 @@ public class ItemViewHolder extends RecyclerView.ViewHolder {
     private LinearLayout linearLayout;
     private ItemClickListener itemClickListener;
 
-    public ItemViewHolder(@NonNull View itemView, ItemClickListener itemClickListener) {
+    public ItemViewHolder(@NonNull View itemView) {
         super(itemView);
-        this.itemClickListener = itemClickListener;
         initViews(itemView);
     }
 
@@ -26,16 +25,17 @@ public class ItemViewHolder extends RecyclerView.ViewHolder {
         title = itemView.findViewById(R.id.item_title);
         image = itemView.findViewById(R.id.item_img);
         linearLayout = itemView.findViewById(R.id.item_card);
-        linearLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                itemClickListener.onItemClick(getAdapterPosition());
-            }
-        });
+
     }
 
     public void setItemData(ResponseModel responseModel) {
         title.setText(responseModel.getTitle());
         Glide.with(image).load(responseModel.getImage()).into(image);
+        linearLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                itemClickListener.onItemClick(responseModel);
+            }
+        });
     }
 }

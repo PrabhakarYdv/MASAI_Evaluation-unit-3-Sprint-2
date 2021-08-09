@@ -1,6 +1,5 @@
 package com.prabhakar.myapplication;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,7 +19,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class ItemListFragment extends Fragment implements ItemClickListener {
+public class ItemListFragment extends Fragment {
     private RecyclerView recyclerView;
     private ArrayList<ResponseModel> item;
     private ItemAdapter itemAdapter;
@@ -51,7 +50,7 @@ public class ItemListFragment extends Fragment implements ItemClickListener {
 
 
     private void setAdapter() {
-        itemAdapter = new ItemAdapter(item, this);
+        itemAdapter = new ItemAdapter(item);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(itemAdapter);
     }
@@ -75,11 +74,4 @@ public class ItemListFragment extends Fragment implements ItemClickListener {
 
     }
 
-    @Override
-    public void onItemClick(int position) {
-        Toast.makeText(getContext(),"Click on item "+(position+1),Toast.LENGTH_SHORT).show();
-//        Intent intent = new Intent(getContext(),ItemListActivity.class);
-//        intent.putExtra("fragment","detail");
-//        startActivity(intent);
-    }
 }

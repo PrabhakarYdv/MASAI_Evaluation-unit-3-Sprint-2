@@ -11,11 +11,9 @@ import java.util.ArrayList;
 
 public class ItemAdapter extends RecyclerView.Adapter<ItemViewHolder> {
     private ArrayList<ResponseModel> itemList;
-    private ItemClickListener itemClickListener;
 
-    public ItemAdapter(ArrayList<ResponseModel> itemList, ItemClickListener itemClickListener) {
+    public ItemAdapter(ArrayList<ResponseModel> itemList) {
         this.itemList = itemList;
-        this.itemClickListener = itemClickListener;
     }
 
     @NonNull
@@ -23,7 +21,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemViewHolder> {
     @Override
     public ItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_layout, parent, false);
-        return new ItemViewHolder(view,itemClickListener);
+        return new ItemViewHolder(view);
     }
 
     @Override

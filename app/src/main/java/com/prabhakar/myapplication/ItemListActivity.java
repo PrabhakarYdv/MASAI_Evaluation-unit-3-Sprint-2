@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-public class ItemListActivity extends AppCompatActivity {
+public class ItemListActivity extends AppCompatActivity implements ItemClickListener {
 
     private FragmentManager fragmentManager;
 
@@ -24,10 +24,17 @@ public class ItemListActivity extends AppCompatActivity {
         fragmentTransaction.add(R.id.fragment, itemListFragment, "ItemFragment").commit();
     }
 
-    private void launchItemDetailsFragment() {
+
+    @Override
+    public void onItemClick(ResponseModel responseModel) {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         ItemDetailsFragment itemDetailsFragment = new ItemDetailsFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString("title",responseModel.getTitle());
+        bundle.putString("subtitle",responseModel.getSubTitle());
+        bundle.putString("img",responseModel.getImage());
+        itemDetailsFragment.setArguments(bundle);
         fragmentTransaction.replace(R.id.fragment, itemDetailsFragment, "ItemDetailsFragment").addToBackStack("").commit();
-    }
 
+    }
 }
